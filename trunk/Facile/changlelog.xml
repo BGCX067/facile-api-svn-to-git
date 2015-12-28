@@ -1,0 +1,32 @@
+<?xml version="1.0" ?><!DOCTYPE changelog SYSTEM "changelog.dtd">
+
+<changelog name="Facile API">
+  <version major="1" minor="0" fix="4">
+    <fixed>Fixed issue 4 (Fix generic method parameter names), however there seems to be still an edge-case remaining which is not cover by the current generics test case</fixed>
+    <changed>Refactored the ILAsmRender and introduced the ILAsmFlagsRenderer</changed>
+    <added>Extended the FacileReflector class to allow external references (addReferenceAssembly, addReferneceEnum) in order to resolve external enum sizes</added>
+    <changed>The static member DEBUG_AND_HALT_ON_ERRORS and PARTIAL_LOADING_SIZE of the FacileReflector class became a per instance member (getHaltOnErrors, getPartialLoadingSizeInBytes)</changed> 
+    <changed>Moved dia package to pdb.dia and introduced a new interface PdbReader in order to abstract the PDB reading mechanism. The former PdbReader is now implemented in NativePdbReader</changed>
+    <added>Added a LICENSE file</added>
+    <added>Added an external eclipse launch configuration to generate the NativePdbReader.h</added>
+    <fixed>Added custom attribute signature enum size detection for the case that the enum is defined in the same assembly</fixed>
+    <fixed>Log Handler was never flushed and therefore accumulated memory. Thanks to Ingmar Kellner</fixed>
+    <fixed>Owner for generic parameters was not set</fixed>
+  </version>
+  <version major="1" minor="0" fix="3">
+    <added>Support for native 64bit DIA access, therefore pdb information can be used on Windows64+Java64 as well</added><fixed>Fixed two small bugs in the custom attribute signature handling</fixed>
+    <added>Better #Strings stream handling, cycle avoidance and bounds checks for obfuscated assemblies</added>
+    <fixed>Fixed missing file.close() operations</fixed>
+    <fixed>Fixed memory leak in log handler</fixed>
+    <added>Added new method to get the implicitly used type specs embedded inside the binary signatures</added>
+    <added>New methods for the Field interface: getFullQualifiedName and getParent (on trial)</added>
+    <added>New methods for the Property interface: getFullQualifiedName and getParent (on trial)</added>
+    <added>"--bca" option for Facile to dump custom attributes in binary format when outputting to ILAsm</added>
+    <fixed>Problem when testing flags for isInterface and isClass methods (and some internal methods)</fixed>
+    <fixed>ILAsmRenderer output is basically ILAsm conform</fixed>
+    <added>Methods for TypeSpecEntry: getMostInnerEnclosedTypeRef and getMostInnerEnclosedTypeSpec</added>
+    <added>Methods for generic argument handling: TypeSpecEntry::porpagateGenericArguments, ParamEntry::linkGenericNameToType and FieldEntry::linkGenericNameToType (all on trial)</added>
+    <changed>GenericParamEntry::setConstraint renamed to GenericParamEntry::addConstraint for better understanding</changed>
+    <changed>ParamEntry now returns a valid owner (null before)</changed>
+  </version>
+</changelog>
